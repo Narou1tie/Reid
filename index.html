@@ -3,120 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reid</title>
+    <title>REID - Studio Design</title>
     <style>
-        /* Les styles (CSS) commencent ici */
+        /* CONFIGURATION GÉNÉRALE */
         body {
-            background-color: #1A1A1A; /* Fond anthracite */
-            color: #FFFFFF; /* Texte blanc */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Dégradé de rouge sombre vers gris presque noir */
+            background: linear-gradient(180deg, #1A1A1A 0%, #390007 100%);
+            background-attachment: fixed; /* Le fond reste fixe pendant le scroll */
+            color: #FFFFFF;
+            font-family: 'Century Gothic', AppleGothic, sans-serif;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
 
-        header {
-            background-color: #000000;
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 2px solid #390007; /* Ligne rouge sombre */
-        }
-
-        header h1 {
-            margin: 0;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
+        /* BARRE DE NAVIGATION */
         nav {
             display: flex;
-            justify-content: center;
-            background-color: #000000;
-            padding: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
+            padding: 10px 40px;
+            border-bottom: 1px solid #9BA0AB;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        nav a {
-            color: #9BA0AB; /* Gris-bleu */
-            text-decoration: none;
-            margin: 0 20px;
+        .nav-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 50px; /* Taille du logo */
+            width: auto;
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
             font-weight: bold;
+            letter-spacing: 5px;
+            color: #FFFFFF;
+        }
+
+        .nav-links a {
+            color: #9BA0AB;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: #390007; /* Devient rouge au survol */
+        .nav-links a:hover {
+            color: #FFFFFF;
         }
 
+        /* CONTENU PRINCIPAL */
         .container {
-            max-width: 1000px;
-            margin: 2rem auto;
+            max-width: 1100px;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
+        /* GRILLE DES ONGLETS/CARTES */
         .sections-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .card {
             background-color: #000000;
-            border: 1px solid #9BA0AB;
-            padding: 40px 20px;
-            text-align: center;
-            transition: transform 0.3s, border-color 0.3s;
-            cursor: pointer;
+            border-radius: 30px; /* Onglets arrondis */
+            overflow: hidden; /* Pour que le GIF ne dépasse pas des arrondis */
+            border: 1px solid rgba(155, 160, 171, 0.3);
+            transition: transform 0.4s ease, border-color 0.4s;
+            position: relative;
+            height: 450px; /* Hauteur des onglets */
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             border-color: #390007;
         }
 
+        /* IMAGE OU GIF DANS LA CARTE */
+        .card-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Le GIF remplit toute la carte */
+            opacity: 0.6; /* Un peu sombre pour que le texte soit lisible */
+            transition: opacity 0.4s;
+        }
+
+        .card:hover .card-media {
+            opacity: 0.9; /* S'éclaire au survol */
+        }
+
+        /* TITRE SUR L'ONGLET */
         .card h2 {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
             margin: 0;
-            color: #FFFFFF;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 50px;
             color: #9BA0AB;
-            font-size: 0.8rem;
-            margin-top: 4rem;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>DESIGN STUDIO</h1>
-    </header>
-
     <nav>
-        <a href="#">FEMME</a>
-        <a href="#">HOMME</a>
-        <a href="#">COLLECTIONS</a>
+        <div class="nav-logo-container">
+            <img src="https://i.ibb.co/27ttN2HD/H.png" alt="REID Logo" class="logo-img">
+            <span class="brand-name">REID</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Femme</a>
+            <a href="#">Homme</a>
+            <a href="#">Collections</a>
+        </div>
     </nav>
 
     <div class="container">
-        <p style="text-align: center; color: #9BA0AB;">Bienvenue dans mon atelier numérique pour [Nom du Jeu].</p>
-        
         <div class="sections-grid">
+            
+            <!-- SECTION FEMME -->
             <div class="card">
+                <!-- Remplace l'URL ci-dessous par ton GIF -->
+                <img src="https://i.ibb.co/xqtkCwMF/heart-ezgif-com-resize.gif" alt="Femme" class="card-media">
                 <h2>FEMME</h2>
             </div>
+
+            <!-- SECTION HOMME -->
             <div class="card">
+                <!-- Remplace l'URL ci-dessous par ton GIF -->
+                <img src="https://i.ibb.co/zhxxjX7X/ezgif-com-resize.gif" alt="Homme" class="card-media">
                 <h2>HOMME</h2>
             </div>
+
+            <!-- SECTION À VENIR -->
             <div class="card">
+                <!-- Remplace l'URL ci-dessous par ton GIF -->
+                <img src="https://i.ibb.co/JRLs3Y6d/ezgif-com-resize-1.gif" alt="À venir" class="card-media">
                 <h2>À VENIR</h2>
             </div>
+
         </div>
     </div>
 
     <footer>
-        &copy; 2024 - Créations pour [Nom du Jeu] - Réalisé avec GitHub
+        &copy; 2024 REID STUDIO. TOUS DROITS RÉSERVÉS.
     </footer>
 
 </body>
