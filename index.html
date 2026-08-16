@@ -7,14 +7,15 @@
     <style>
         /* CONFIGURATION GÉNÉRALE */
         body {
-            /* Dégradé de rouge sombre vers gris presque noir */
             background: linear-gradient(180deg, #1A1A1A 0%, #390007 100%);
-            background-attachment: fixed; /* Le fond reste fixe pendant le scroll */
+            background-attachment: fixed;
             color: #FFFFFF;
             font-family: 'Century Gothic', AppleGothic, sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* BARRE DE NAVIGATION */
@@ -22,23 +23,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 10px 40px;
             border-bottom: 1px solid #9BA0AB;
             position: sticky;
             top: 0;
             z-index: 100;
-        }
-
-        .nav-logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-img {
-            height: 50px; /* Taille du logo */
-            width: auto;
         }
 
         .brand-name {
@@ -64,7 +54,7 @@
         /* CONTENU PRINCIPAL */
         .container {
             flex: 1;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 60px auto;
             padding: 0 20px;
         }
@@ -72,39 +62,48 @@
         /* GRILLE DES ONGLETS/CARTES */
         .sections-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            
+            /* --- ESPACE ENTRE LES CARTES (MODIFIABLE ICI) --- */
+            gap: 60px; 
         }
 
         .card {
             background-color: #000000;
-            border-radius: 30px; /* Onglets arrondis */
-            overflow: hidden; /* Pour que le GIF ne dépasse pas des arrondis */
+            border-radius: 30px;
+            overflow: hidden;
             border: 1px solid rgba(155, 160, 171, 0.3);
-            transition: transform 0.4s ease, border-color 0.4s;
+            transition: all 0.4s ease; /* Transition douce pour tout (mouvement et lueur) */
             position: relative;
-            height: 450px; /* Hauteur des onglets */
+
+            /* --- TAILLE DES CARTES (HAUTEUR MODIFIABLE ICI) --- */
+            /* J'ai baissé de 450px à 330px pour réduire d'un quart environ */
+            height: 330px; 
         }
 
+        /* EFFET AU SURVOL (HOVER) */
         .card:hover {
-            transform: translateY(-10px);
-            border-color: #390007;
+            transform: translateY(-12px);
+            border-color: #ff0015; /* Rouge plus vif pour le bord du néon */
+            
+            /* --- EFFET NÉON ROUGE --- */
+            /* On crée plusieurs couches d'ombre pour simuler la lumière qui brille */
+            box-shadow: 0 0 15px rgba(255, 0, 21, 0.4), 
+                        0 0 30px rgba(57, 0, 7, 0.6);
         }
 
-        /* IMAGE OU GIF DANS LA CARTE */
         .card-media {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Le GIF remplit toute la carte */
-            opacity: 0.6; /* Un peu sombre pour que le texte soit lisible */
+            object-fit: cover;
+            opacity: 0.6;
             transition: opacity 0.4s;
         }
 
         .card:hover .card-media {
-            opacity: 0.9; /* S'éclaire au survol */
+            opacity: 0.9;
         }
 
-        /* TITRE SUR L'ONGLET */
         .card h2 {
             position: absolute;
             bottom: 30px;
@@ -112,7 +111,7 @@
             right: 0;
             text-align: center;
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* Légèrement réduit pour s'adapter à la carte plus petite */
             letter-spacing: 4px;
             text-transform: uppercase;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
@@ -124,16 +123,14 @@
             color: #9BA0AB;
             font-size: 0.7rem;
             letter-spacing: 2px;
-            margin-top: 300px;
+            margin-top: 100px; /* Réduit un peu car le Flexbox gère déjà l'espace */
         }
     </style>
 </head>
 <body>
 
     <nav>
-        
-            <span class="brand-name">REID</span>
-        </div>
+        <span class="brand-name">REID</span>
         <div class="nav-links">
             <a href="#">Femme</a>
             <a href="#">Homme</a>
@@ -144,23 +141,17 @@
     <div class="container">
         <div class="sections-grid">
             
-            <!-- SECTION FEMME -->
             <div class="card">
-                <!-- Remplace l'URL ci-dessous par ton GIF -->
                 <img src="https://i.ibb.co/xqtkCwMF/heart-ezgif-com-resize.gif" alt="Femme" class="card-media">
                 <h2>FEMME</h2>
             </div>
 
-            <!-- SECTION HOMME -->
             <div class="card">
-                <!-- Remplace l'URL ci-dessous par ton GIF -->
                 <img src="https://i.ibb.co/zhxxjX7X/ezgif-com-resize.gif" alt="Homme" class="card-media">
                 <h2>HOMME</h2>
             </div>
 
-            <!-- SECTION À VENIR -->
             <div class="card">
-                <!-- Remplace l'URL ci-dessous par ton GIF -->
                 <img src="https://i.ibb.co/JRLs3Y6d/ezgif-com-resize-1.gif" alt="À venir" class="card-media">
                 <h2>À VENIR</h2>
             </div>
