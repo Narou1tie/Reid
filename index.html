@@ -16,6 +16,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden; /* Évite le défilement horizontal bizarre */
         }
 
         /* BARRE DE NAVIGATION */
@@ -23,27 +24,28 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 10px 40px;
-            border-bottom: 1px solid #9BA0AB;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px 60px;
+            border-bottom: 1px solid rgba(155, 160, 171, 0.2);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .brand-name {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            letter-spacing: 5px;
+            letter-spacing: 10px;
             color: #FFFFFF;
         }
 
         .nav-links a {
             color: #9BA0AB;
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 30px;
             font-size: 0.9rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
             transition: color 0.3s;
         }
 
@@ -54,76 +56,86 @@
         /* CONTENU PRINCIPAL */
         .container {
             flex: 1;
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
+            /* Largeur augmentée pour contenir 3 cartes de 500px + les espaces */
+            max-width: 1700px; 
+            margin: 80px auto;
+            padding: 0 40px;
         }
 
-        /* GRILLE DES ONGLETS/CARTES */
+        /* ALIGNEMENT HORIZONTAL DES CARTES */
         .sections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex; /* Utilisation de Flex pour garder l'alignement horizontal */
+            flex-wrap: wrap; /* Permet de passer à la ligne sur petit écran */
+            justify-content: center; /* Centre les cartes sur la page */
             
             /* --- ESPACE ENTRE LES CARTES (MODIFIABLE ICI) --- */
-            gap: 60px; 
+            gap: 50px; 
         }
 
         .card {
             background-color: #000000;
-            border-radius: 30px;
+            border-radius: 20px; /* Un peu moins arrondi pour un look plus "éditorial" */
             overflow: hidden;
-            border: 1px solid rgba(155, 160, 171, 0.3);
-            transition: all 0.4s ease; /* Transition douce pour tout (mouvement et lueur) */
+            border: 1px solid rgba(155, 160, 171, 0.2);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
 
-            /* --- TAILLE DES CARTES (HAUTEUR MODIFIABLE ICI) --- */
-            /* J'ai baissé de 450px à 330px pour réduire d'un quart environ */
-            height: 330px; 
+            /* --- DIMENSIONS DES CARTES (MODIFIABLES ICI) --- */
+            width: 500px;  /* Largeur */
+            height: 600px; /* Hauteur */
         }
 
-        /* EFFET AU SURVOL (HOVER) */
+        /* EFFET AU SURVOL (NÉON) */
         .card:hover {
-            transform: translateY(-12px);
-            border-color: #ff0015; /* Rouge plus vif pour le bord du néon */
-            
-            /* --- EFFET NÉON ROUGE --- */
-            /* On crée plusieurs couches d'ombre pour simuler la lumière qui brille */
-            box-shadow: 0 0 15px rgba(255, 0, 21, 0.4), 
-                        0 0 30px rgba(57, 0, 7, 0.6);
+            transform: translateY(-15px);
+            border-color: #ff0015;
+            /* Lueur néon rouge plus diffuse */
+            box-shadow: 0 10px 30px rgba(255, 0, 21, 0.3), 
+                        0 0 60px rgba(57, 0, 7, 0.2);
         }
 
         .card-media {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.6;
-            transition: opacity 0.4s;
+            object-fit: cover; /* Le GIF de 500x500 remplira les 500x600 proprement */
+            opacity: 0.7;
+            transition: opacity 0.5s, transform 0.8s;
         }
 
         .card:hover .card-media {
-            opacity: 0.9;
+            opacity: 1;
+            transform: scale(1.05); /* Petit zoom au survol pour l'élégance */
         }
 
         .card h2 {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 0;
             right: 0;
             text-align: center;
             margin: 0;
-            font-size: 1.3rem; /* Légèrement réduit pour s'adapter à la carte plus petite */
-            letter-spacing: 4px;
+            font-size: 2rem;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 0px 5px 15px rgba(0,0,0,0.9);
+            pointer-events: none; /* Le texte ne gêne pas le survol */
         }
 
         footer {
             text-align: center;
-            padding: 50px;
+            padding: 80px 20px;
             color: #9BA0AB;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            margin-top: 100px; /* Réduit un peu car le Flexbox gère déjà l'espace */
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            opacity: 0.6;
+        }
+
+        /* Ajustement pour les petits écrans (tablettes/mobiles) */
+        @media (max-width: 1200px) {
+            .card {
+                width: 90%; /* Les cartes prennent la largeur de l'écran si c'est trop petit */
+                height: 500px;
+            }
         }
     </style>
 </head>
