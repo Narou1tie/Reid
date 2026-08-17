@@ -16,7 +16,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden; /* Évite le défilement horizontal bizarre */
+            overflow-x: hidden;
         }
 
         /* BARRE DE NAVIGATION */
@@ -24,12 +24,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 20px 60px;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 15px 60px;
             border-bottom: 1px solid rgba(155, 160, 171, 0.2);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000; /* Très haut pour passer devant les cartes */
         }
 
         .brand-name {
@@ -37,74 +37,115 @@
             font-weight: bold;
             letter-spacing: 10px;
             color: #FFFFFF;
+            text-decoration: none;
         }
 
-        .nav-links a {
+        .nav-links {
+            display: flex;
+        }
+
+        /* STYLE DES MENUS DÉROULANTS */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
             color: #9BA0AB;
             text-decoration: none;
-            margin-left: 30px;
+            padding: 10px 20px;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: color 0.3s;
+            display: block;
         }
 
-        .nav-links a:hover {
+        .dropdown:hover .dropbtn {
             color: #FFFFFF;
+        }
+
+        /* LE CONTENU DU MENU (CACHÉ PAR DÉFAUT) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.95);
+            min-width: 220px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
+            border: 1px solid #390007; /* Rappel du rouge sombre */
+            z-index: 1;
+            padding: 10px 0;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* LIENS À L'INTÉRIEUR DU MENU */
+        .dropdown-content a {
+            color: #9BA0AB;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        /* SURVOL DES LIENS DU MENU */
+        .dropdown-content a:hover {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            padding-left: 30px; /* Petit effet de décalage */
+            border-left: 3px solid #ff0015; /* Petite barre néon à gauche */
+        }
+
+        /* AFFICHER LE MENU AU SURVOL */
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         /* CONTENU PRINCIPAL */
         .container {
             flex: 1;
-            /* Largeur augmentée pour contenir 3 cartes de 500px + les espaces */
             max-width: 1700px; 
             margin: 80px auto;
             padding: 0 40px;
         }
 
-        /* ALIGNEMENT HORIZONTAL DES CARTES */
         .sections-grid {
-            display: flex; /* Utilisation de Flex pour garder l'alignement horizontal */
-            flex-wrap: wrap; /* Permet de passer à la ligne sur petit écran */
-            justify-content: center; /* Centre les cartes sur la page */
-            
-            /* --- ESPACE ENTRE LES CARTES (MODIFIABLE ICI) --- */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 50px; 
         }
 
         .card {
             background-color: #000000;
-            border-radius: 20px; /* Un peu moins arrondi pour un look plus "éditorial" */
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(155, 160, 171, 0.2);
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
-
-            /* --- DIMENSIONS DES CARTES (MODIFIABLES ICI) --- */
-            width: 500px;  /* Largeur */
-            height: 600px; /* Hauteur */
+            width: 500px;
+            height: 600px;
         }
 
-        /* EFFET AU SURVOL (NÉON) */
         .card:hover {
             transform: translateY(-15px);
             border-color: #ff0015;
-            /* Lueur néon rouge plus diffuse */
-            box-shadow: 0 10px 30px rgba(255, 0, 21, 0.3), 
-                        0 0 60px rgba(57, 0, 7, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 0, 21, 0.3);
         }
 
         .card-media {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Le GIF de 500x500 remplira les 500x600 proprement */
+            object-fit: cover;
             opacity: 0.7;
             transition: opacity 0.5s, transform 0.8s;
         }
 
         .card:hover .card-media {
             opacity: 1;
-            transform: scale(1.05); /* Petit zoom au survol pour l'élégance */
+            transform: scale(1.05);
         }
 
         .card h2 {
@@ -118,7 +159,7 @@
             letter-spacing: 8px;
             text-transform: uppercase;
             text-shadow: 0px 5px 15px rgba(0,0,0,0.9);
-            pointer-events: none; /* Le texte ne gêne pas le survol */
+            pointer-events: none;
         }
 
         footer {
@@ -129,45 +170,66 @@
             letter-spacing: 4px;
             opacity: 0.6;
         }
-
-        /* Ajustement pour les petits écrans (tablettes/mobiles) */
-        @media (max-width: 1200px) {
-            .card {
-                width: 90%; /* Les cartes prennent la largeur de l'écran si c'est trop petit */
-                height: 500px;
-            }
-        }
     </style>
 </head>
 <body>
 
     <nav>
-        <span class="brand-name">REID</span>
+        <a href="#" class="brand-name">REID</a>
+        
         <div class="nav-links">
-            <a href="#">Femme</a>
-            <a href="#">Homme</a>
-            <a href="#">À venir</a>
+            <!-- MENU FEMME -->
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Femme</a>
+                <div class="dropdown-content">
+                    <a href="#">Vestes</a>
+                    <a href="#">Hauts</a>
+                    <a href="#">Bas</a>
+                    <a href="#">Tenues intégrales</a>
+                    <a href="#">Chaussures</a>
+                    <a href="#">Accessoires</a>
+                    <a href="#">Bijoux</a>
+                </div>
+            </div>
+
+            <!-- MENU HOMME -->
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Homme</a>
+                <div class="dropdown-content">
+                    <a href="#">Vestes</a>
+                    <a href="#">Hauts</a>
+                    <a href="#">Bas</a>
+                    <a href="#">Tenues intégrales</a>
+                    <a href="#">Chaussures</a>
+                    <a href="#">Accessoires</a>
+                    <a href="#">Bijoux</a>
+                </div>
+            </div>
+
+            <!-- MENU À VENIR -->
+            <div class="dropdown">
+                <a href="#" class="dropbtn">À venir</a>
+                <div class="dropdown-content">
+                    <a href="#">Collections 2026</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <div class="container">
         <div class="sections-grid">
-            
             <div class="card">
                 <img src="https://i.ibb.co/xqtkCwMF/heart-ezgif-com-resize.gif" alt="Femme" class="card-media">
                 <h2>FEMME</h2>
             </div>
-
             <div class="card">
-                <img src="https://i.ibb.co/Pv4xXRdV/From-Klickpin-com-Seethese21-Freshnaturalskincareroutineideasthathelpyoucreateapolishedlookwithverysi.gif" alt="Homme" class="card-media">
+                <img src="https://i.ibb.co/zhxxjX7X/ezgif-com-resize.gif" alt="Homme" class="card-media">
                 <h2>HOMME</h2>
             </div>
-
             <div class="card">
                 <img src="https://i.ibb.co/JRLs3Y6d/ezgif-com-resize-1.gif" alt="À venir" class="card-media">
                 <h2>À VENIR</h2>
             </div>
-
         </div>
     </div>
 
