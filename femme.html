@@ -219,72 +219,66 @@
 
     <footer>&copy; 2024 REID STUDIO. TOUS DROITS RÉSERVÉS.</footer>
 
-    <script>
-        // 1. Ouvrir/fermer la sidebar
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const btn = document.querySelector('.toggle-sidebar');
-            sidebar.classList.toggle('active');
-            btn.innerHTML = sidebar.classList.contains('active') ? "❮" : "❯";
-        }
+<script>
+    // 1. Ouvrir/fermer la sidebar
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const btn = document.querySelector('.toggle-sidebar');
+        sidebar.classList.toggle('active');
+        btn.innerHTML = sidebar.classList.contains('active') ? "❮" : "❯";
+    }
 
-        // 2. Changer l'image au clic couleur
-        function changeImage(element, newSrc) {
-            const card = element.closest('.product-card');
-            card.querySelector('.main-img').src = newSrc;
-            const circles = card.querySelectorAll('.color-circle');
-            circles.forEach(c => c.classList.remove('active'));
-            element.classList.add('active');
-        }
+    // 2. Changer l'image au clic couleur
+    function changeImage(element, newSrc) {
+        const card = element.closest('.product-card');
+        card.querySelector('.main-img').src = newSrc;
+        const circles = card.querySelectorAll('.color-circle');
+        circles.forEach(c => c.classList.remove('active'));
+        element.classList.add('active');
+    }
 
-        // 3. FONCTION DE FILTRAGE (LA NOUVEAUTÉ)
-        function filterCategory(category) {
-            const cards = document.querySelectorAll('.product-card');
-            const filters = document.querySelectorAll('.filter-group li');
-
-            // Mettre à jour l'apparence des boutons de la sidebar
-            filters.forEach(f => f.classList.remove('active-filter'));
-            event.target.classList.add('active-filter');
-
-            cards.forEach(card => {
-                // Si on choisit 'all', on montre tout
-                if (category === 'all') {
-                    card.style.display = 'flex';
-                } 
-                // Sinon, on compare avec le data-category de la carte
-                else if (card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                } 
-                // Sinon on cache
-                else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-        // Ce code s'exécute automatiquement au chargement de la page
-window.onload = function() {
-    // 1. On regarde s'il y a un paramètre "cat" dans l'URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const categoryFromUrl = urlParams.get('cat');
-
-    // 2. Si on trouve une catégorie (ex: vestes)
-    if (categoryFromUrl) {
-        // On active le filtre
-        filterCategory(categoryFromUrl);
-        
-        // Optionnel : on met à jour le style dans la sidebar pour montrer quel filtre est actif
+    // 3. FONCTION DE FILTRAGE AMÉLIORÉE
+    function filterCategory(category, clickedElement) {
+        const cards = document.querySelectorAll('.product-card');
         const filters = document.querySelectorAll('.filter-group li');
-        filters.forEach(f => {
-            f.classList.remove('active-filter');
-            // Si le texte du bouton contient la catégorie, on l'allume
-            if(f.getAttribute('onclick').includes(categoryFromUrl)) {
-                f.classList.add('active-filter');
+
+        // Gérer l'apparence des boutons (seulement si on a cliqué sur l'un d'eux)
+        filters.forEach(f => f.classList.remove('active-filter'));
+        if (clickedElement) {
+            clickedElement.classList.add('active-filter');
+        }
+
+        cards.forEach(card => {
+            const cardCat = card.getAttribute('data-category');
+            if (category === 'all' || cardCat === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
             }
         });
     }
-};
-        
-    </script>
+
+    // 4. CHARGEMENT AUTOMATIQUE DEPUIS L'URL
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryFromUrl = urlParams.get('cat');
+
+        if (categoryFromUrl) {
+            // On lance le filtrage
+            filterCategory(categoryFromUrl);
+            
+            // On cherche quel bouton allumer dans la sidebar
+            const filters = document.querySelectorAll('.filter-group li');
+            filters.forEach(f => {
+                f.classList.remove('active-filter');
+                // On vérifie si le texte du bouton correspond (en minuscule)
+                if(f.innerText.toLowerCase().includes(categoryFromUrl)) {
+                    f.classList.add('active-filter');
+                }
+            });
+        }
+    };
+</script>
 
 </body>
 </html>
