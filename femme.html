@@ -121,18 +121,36 @@
         .description { font-size: 0.75rem; color: #9BA0AB; line-height: 1.5; margin-top: 10px; }
 
         footer { text-align: center; padding: 60px; color: #9BA0AB; font-size: 0.7rem; }
+        .back-arrow {
+    color: #9BA0AB; /* Gris comme les autres liens */
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: 0.3s;
+    line-height: 1;
+}
+
+.back-arrow:hover {
+    color: #FFFFFF; /* Devient blanche au survol */
+    transform: translateX(-5px); /* Petit mouvement vers la gauche */
+}
     </style>
 </head>
 <body>
 
     <nav>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- La flèche de retour -->
+        <a href="index.html" class="back-arrow" title="Retour à l'accueil">❮</a>
+        
         <a href="index.html" class="brand-name">REID</a>
-        <div class="nav-links">
-            <div class="dropdown"><a href="femme.html" class="dropbtn" style="color:white">Femme</a></div>
-            <div class="dropdown"><a href="#" class="dropbtn">Homme</a></div>
-            <div class="dropdown"><a href="#" class="dropbtn">À venir</a></div>
-        </div>
-    </nav>
+    </div>
+    
+    <div class="nav-links">
+        <div class="dropdown"><a href="femme.html" class="dropbtn" style="color:white">Femme</a></div>
+        <div class="dropdown"><a href="#" class="dropbtn">Homme</a></div>
+        <div class="dropdown"><a href="#" class="dropbtn">À venir</a></div>
+    </div>
+</nav>
 
     <!-- SIDEBAR COULISSANTE -->
     <aside class="sidebar" id="sidebar">
