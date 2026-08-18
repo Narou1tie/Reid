@@ -29,7 +29,7 @@
         /* --- PANNEAU DE TRI COULISSANT (SIDEBAR) --- */
         .sidebar {
             position: fixed;
-            left: -250px; /* Caché par défaut */
+            left: -250px;
             top: 80px;
             width: 250px;
             height: calc(100vh - 80px);
@@ -41,10 +41,8 @@
             box-sizing: border-box;
         }
 
-        /* La classe qui ouvre le menu */
         .sidebar.active { left: 0; }
 
-        /* Le petit bouton flèche */
         .toggle-sidebar {
             position: absolute;
             right: -40px;
@@ -62,13 +60,23 @@
         }
 
         .sidebar h3 { font-size: 0.9rem; letter-spacing: 2px; border-bottom: 1px solid #390007; padding-bottom: 10px; margin-top: 30px; }
+        
         .filter-group { list-style: none; padding: 0; font-size: 0.8rem; color: #9BA0AB; }
-        .filter-group li { padding: 8px 0; cursor: pointer; transition: 0.3s; }
-        .filter-group li:hover { color: #FFFFFF; }
+        
+        /* Style des options de tri */
+        .filter-group li { 
+            padding: 10px 0; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .filter-group li:hover { color: #FFFFFF; padding-left: 5px; }
+        .filter-group li.active-filter { color: #ff0015; font-weight: bold; }
 
         /* CONTENEUR BOUTIQUE */
         .shop-container {
-            padding: 40px 40px 40px 80px; /* Marge à gauche pour laisser la place à la flèche */
+            padding: 40px 40px 40px 80px;
             transition: 0.5s;
         }
 
@@ -79,45 +87,35 @@
             gap: 30px;
         }
 
-        /* --- CARTE PRODUIT (PLUS HAUTE) --- */
+        /* --- CARTE PRODUIT --- */
         .product-card {
             background: #000000;
             border: 1px solid rgba(155, 160, 171, 0.1);
             border-radius: 15px;
             display: flex;
-            height: 300px; /* Augmenté comme demandé */
+            height: 300px;
             overflow: hidden;
             transition: 0.4s;
+            /* Animation d'apparition fluide quand on filtre */
+            animation: fadeIn 0.5s;
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .product-card:hover { transform: translateY(-5px); border-color: rgba(155,160,171, 0.4); }
 
-        .product-image { 
-    width: 60%; /* L'image prend maintenant 60% de la largeur de la carte */
-    background: #111; 
-    overflow: hidden; 
-}
-        .product-image img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            opacity: 0.9; transition: 0.3s; 
-        }
+        .product-image { width: 60%; background: #111; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: 0.3s; }
 
-        .product-info {
-    width: 40%; /* Le texte prend le reste (40%) */
-    padding: 20px;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between;
-}
+        .product-info { width: 40%; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
         .product-info h4 { margin: 0; font-size: 1rem; letter-spacing: 1px; color: #FFFFFF; }
         .price { color: #9BA0AB; font-size: 0.9rem; margin: 5px 0; }
         
-        /* COULEURS */
         .colors { display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap; }
-        .color-circle {
-            width: 18px; height: 18px; border-radius: 50%;
-            border: 2px solid transparent;
-            cursor: pointer; transition: 0.2s;
-        }
+        .color-circle { width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: 0.2s; }
         .color-circle.active { border-color: white; transform: scale(1.2); }
 
         .description { font-size: 0.75rem; color: #9BA0AB; line-height: 1.5; margin-top: 10px; }
@@ -139,15 +137,19 @@
     <!-- SIDEBAR COULISSANTE -->
     <aside class="sidebar" id="sidebar">
         <div class="toggle-sidebar" onclick="toggleSidebar()">❯</div>
-        <h3>TYPE</h3>
+        <h3>CATEGORIES</h3>
         <ul class="filter-group">
-            <li>Vestes</li>
-            <li>Hauts</li>
-            <li>Bas</li>
-            <li>Chaussures</li>
-            <li>Accessoires</li>
+            <!-- IMPORTANT : filterCategory('NOM') doit correspondre au data-category des cartes -->
+            <li onclick="filterCategory('all')" class="active-filter">Tout voir</li>
+            <li onclick="filterCategory('vestes')">Vestes</li>
+            <li onclick="filterCategory('hauts')">Hauts</li>
+            <li onclick="filterCategory('bas')">Bas</li>
+            <li onclick="filterCategory('chaussures')">Chaussures</li>
+            <li onclick="filterCategory('accessoires')">Accessoires</li>
+            <li onclick="filterCategory('bijoux')">Bijoux</li>
         </ul>
-        <h3>COLORIS</h3>
+        
+        <h3>COLORIS PRINCIPAL</h3>
         <div class="colors">
             <div class="color-circle" style="background: #000;"></div>
             <div class="color-circle" style="background: #FFF;"></div>
@@ -156,68 +158,90 @@
     </aside>
 
     <div class="shop-container" id="main-content">
-        <main class="product-grid">
+        <main class="product-grid" id="product-grid">
             
-            <!-- EXEMPLE PRODUIT INTERACTIF -->
-            <div class="product-card">
+            <!-- EXEMPLE PRODUIT (VESTE) -->
+            <!-- IMPORTANT : J'ai ajouté data-category="vestes" ici -->
+            <div class="product-card" data-category="vestes">
                 <div class="product-image">
-                    <!-- On donne une ID à l'image pour pouvoir la changer -->
                     <img src="images/femme/vestes/veste-noire.gif" class="main-img" alt="Produit">
                 </div>
                 <div class="product-info">
                     <div>
                         <h4>VESTE REID V1</h4>
                         <div class="price">45.00 €</div>
-                        
                         <div class="colors">
-                            <!-- Ici le secret : data-image contient le lien de la version de couleur -->
-                            <div class="color-circle active" 
-                                 style="background: #000;" 
-                                 onclick="changeImage(this, 'images/femme/vestes/veste-noire.gif')"></div>
-                            
-                            <div class="color-circle" 
-                                 style="background: #390007;" 
-                                 onclick="changeImage(this, 'images/femme/vestes/veste-rouge.gif')"></div>
+                            <div class="color-circle active" style="background: #000;" onclick="changeImage(this, 'images/femme/vestes/veste-noire.gif')"></div>
+                            <div class="color-circle" style="background: #390007;" onclick="changeImage(this, 'images/femme/vestes/veste-rouge.gif')"></div>
                         </div>
                     </div>
-                    <p class="description">Une coupe cintrée avec des détails néons. Disponible en plusieurs coloris exclusifs.</p>
+                    <p class="description">Une coupe cintrée avec des détails néons.</p>
                 </div>
             </div>
 
-            <!-- Ajoute tes autres cartes ici en suivant le même modèle -->
+            <!-- EXEMPLE PRODUIT (BIJOUX) -->
+            <div class="product-card" data-category="bijoux">
+                <div class="product-image">
+                    <img src="images/femme/bijoux/collier-reid.gif" class="main-img" alt="Produit">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h4>COLLIER ÉBÈNE</h4>
+                        <div class="price">15.00 €</div>
+                        <div class="colors">
+                            <div class="color-circle active" style="background: #000;" onclick="changeImage(this, 'images/femme/bijoux/collier-reid.gif')"></div>
+                        </div>
+                    </div>
+                    <p class="description">Un bijou fin pour sublimer vos tenues de soirée.</p>
+                </div>
+            </div>
 
         </main>
     </div>
 
     <footer>&copy; 2024 REID STUDIO. TOUS DROITS RÉSERVÉS.</footer>
 
-    <!-- PETIT SCRIPT POUR L'INTERACTIVITÉ -->
     <script>
-        // Fonction pour ouvrir/fermer la sidebar
+        // 1. Ouvrir/fermer la sidebar
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const btn = document.querySelector('.toggle-sidebar');
             sidebar.classList.toggle('active');
-            
-            // On change le sens de la flèche
-            if(sidebar.classList.contains('active')) {
-                btn.innerHTML = "❮";
-            } else {
-                btn.innerHTML = "❯";
-            }
+            btn.innerHTML = sidebar.classList.contains('active') ? "❮" : "❯";
         }
 
-        // Fonction pour changer l'image au clic sur une couleur
+        // 2. Changer l'image au clic couleur
         function changeImage(element, newSrc) {
-            // 1. Trouver la carte parente
             const card = element.closest('.product-card');
-            // 2. Changer l'image dans cette carte
             card.querySelector('.main-img').src = newSrc;
-            
-            // 3. Gérer le petit cercle blanc autour de la couleur sélectionnée
             const circles = card.querySelectorAll('.color-circle');
             circles.forEach(c => c.classList.remove('active'));
             element.classList.add('active');
+        }
+
+        // 3. FONCTION DE FILTRAGE (LA NOUVEAUTÉ)
+        function filterCategory(category) {
+            const cards = document.querySelectorAll('.product-card');
+            const filters = document.querySelectorAll('.filter-group li');
+
+            // Mettre à jour l'apparence des boutons de la sidebar
+            filters.forEach(f => f.classList.remove('active-filter'));
+            event.target.classList.add('active-filter');
+
+            cards.forEach(card => {
+                // Si on choisit 'all', on montre tout
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } 
+                // Sinon, on compare avec le data-category de la carte
+                else if (card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } 
+                // Sinon on cache
+                else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
 
