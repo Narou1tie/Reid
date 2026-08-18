@@ -237,17 +237,28 @@
         element.classList.add('active');
     }
 
-    // 3. FONCTION DE FILTRAGE AMÉLIORÉE
+    // 3. FONCTION DE FILTRAGE (CORRIGÉE)
     function filterCategory(category, clickedElement) {
         const cards = document.querySelectorAll('.product-card');
         const filters = document.querySelectorAll('.filter-group li');
 
-        // Gérer l'apparence des boutons (seulement si on a cliqué sur l'un d'eux)
+        // Gérer l'apparence des boutons de la sidebar
         filters.forEach(f => f.classList.remove('active-filter'));
+        
+        // Si on a cliqué sur un bouton (manuel)
         if (clickedElement) {
             clickedElement.classList.add('active-filter');
+        } 
+        // Si ça vient de l'URL (automatique)
+        else {
+            filters.forEach(f => {
+                if(f.getAttribute('onclick') && f.getAttribute('onclick').includes("'" + category + "'")) {
+                    f.classList.add('active-filter');
+                }
+            });
         }
 
+        // LE FILTRAGE REEL
         cards.forEach(card => {
             const cardCat = card.getAttribute('data-category');
             if (category === 'all' || cardCat === category) {
@@ -259,25 +270,14 @@
     }
 
     // 4. CHARGEMENT AUTOMATIQUE DEPUIS L'URL
-    window.onload = function() {
+    window.addEventListener('load', function() {
         const urlParams = new URLSearchParams(window.location.search);
         const categoryFromUrl = urlParams.get('cat');
 
         if (categoryFromUrl) {
-            // On lance le filtrage
             filterCategory(categoryFromUrl);
-            
-            // On cherche quel bouton allumer dans la sidebar
-            const filters = document.querySelectorAll('.filter-group li');
-            filters.forEach(f => {
-                f.classList.remove('active-filter');
-                // On vérifie si le texte du bouton correspond (en minuscule)
-                if(f.innerText.toLowerCase().includes(categoryFromUrl)) {
-                    f.classList.add('active-filter');
-                }
-            });
         }
-    };
+    });
 </script>
 
 </body>
