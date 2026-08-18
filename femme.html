@@ -158,13 +158,13 @@
         <h3>CATEGORIES</h3>
         <ul class="filter-group">
             <!-- IMPORTANT : filterCategory('NOM') doit correspondre au data-category des cartes -->
-            <li onclick="filterCategory('all')" class="active-filter">Tout voir</li>
-            <li onclick="filterCategory('vestes')">Vestes</li>
-            <li onclick="filterCategory('hauts')">Hauts</li>
-            <li onclick="filterCategory('bas')">Bas</li>
-            <li onclick="filterCategory('chaussures')">Chaussures</li>
-            <li onclick="filterCategory('accessoires')">Accessoires</li>
-            <li onclick="filterCategory('bijoux')">Bijoux</li>
+            <li onclick="filterCategory('all', this)">Tout voir</li>
+            <li onclick="filterCategory('vestes', this)">Vestes</li>
+            <li onclick="filterCategory('hauts', this)">Hauts</li>
+            <li onclick="filterCategory('bas', this)">Bas</li>
+            <li onclick="filterCategory('chaussures', this)">Chaussures</li>
+            <li onclick="filterCategory('accessoires', this)">Accessoires</li>
+            <li onclick="filterCategory('bijoux', this)">Bijoux</li>
         </ul>
         
         <h3>COLORIS PRINCIPAL</h3>
