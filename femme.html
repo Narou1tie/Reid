@@ -28,137 +28,69 @@
 
         /* --- PANNEAU DE TRI COULISSANT (SIDEBAR) --- */
         .sidebar {
-            position: fixed;
-            left: -250px;
-            top: 80px;
-            width: 250px;
-            height: calc(100vh - 80px);
-            background: rgba(0, 0, 0, 0.9);
-            border-right: 1px solid #390007;
-            transition: 0.5s;
-            z-index: 999;
-            padding: 20px;
-            box-sizing: border-box;
+            position: fixed; left: -250px; top: 80px; width: 250px; height: calc(100vh - 80px);
+            background: rgba(0, 0, 0, 0.9); border-right: 1px solid #390007;
+            transition: 0.5s; z-index: 999; padding: 20px; box-sizing: border-box;
         }
-
         .sidebar.active { left: 0; }
-
         .toggle-sidebar {
-            position: absolute;
-            right: -40px;
-            top: 20px;
-            width: 40px;
-            height: 40px;
-            background: #390007;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 0 10px 10px 0;
-            font-size: 1.2rem;
+            position: absolute; right: -40px; top: 20px; width: 40px; height: 40px;
+            background: #390007; color: white; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; border-radius: 0 10px 10px 0; font-size: 1.2rem;
         }
-
         .sidebar h3 { font-size: 0.9rem; letter-spacing: 2px; border-bottom: 1px solid #390007; padding-bottom: 10px; margin-top: 30px; }
-        
         .filter-group { list-style: none; padding: 0; font-size: 0.8rem; color: #9BA0AB; }
-        
-        /* Style des options de tri */
-        .filter-group li { 
-            padding: 10px 0; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .filter-group li { padding: 10px 0; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         .filter-group li:hover { color: #FFFFFF; padding-left: 5px; }
         .filter-group li.active-filter { color: #ff0015; font-weight: bold; }
 
-        /* CONTENEUR BOUTIQUE */
-        .shop-container {
-            padding: 40px 40px 40px 80px;
-            transition: 0.5s;
-        }
+        /* BOUTIQUE */
+        .shop-container { padding: 40px 40px 40px 80px; transition: 0.5s; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 30px; }
 
-        /* GRILLE DE PRODUITS */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px;
-        }
-
-        /* --- CARTE PRODUIT --- */
+        /* CARTE PRODUIT */
         .product-card {
-            background: #1c1c1c;
-            border: 1px solid rgba(155, 160, 171, 0.1);
-            border-radius: 15px;
-            display: flex;
-            height: 300px;
-            overflow: hidden;
-            transition: 0.4s;
-            /* Animation d'apparition fluide quand on filtre */
-            animation: fadeIn 0.5s;
+            background: #1c1c1c; border: 1px solid rgba(155, 160, 171, 0.1);
+            border-radius: 15px; display: flex; height: 300px; overflow: hidden;
+            transition: 0.4s; animation: fadeIn 0.5s;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .product-card:hover { transform: translateY(-5px); border-color: rgba(155,160,171, 0.4); }
 
         .product-image { width: 60%; background: #111; overflow: hidden; }
         .product-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: 0.3s; }
-
         .product-info { width: 40%; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
         .product-info h4 { margin: 0; font-size: 1rem; letter-spacing: 1px; color: #FFFFFF; }
         .price { color: #9BA0AB; font-size: 0.9rem; margin: 5px 0; }
-        
         .colors { display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap; }
         .color-circle { width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: 0.2s; }
         .color-circle.active { border-color: white; transform: scale(1.2); }
-
         .description { font-size: 0.75rem; color: #9BA0AB; line-height: 1.5; margin-top: 10px; }
 
         footer { text-align: center; padding: 60px; color: #9BA0AB; font-size: 0.7rem; }
-        .back-arrow {
-    color: #9BA0AB; /* Gris comme les autres liens */
-    text-decoration: none;
-    font-size: 1.5rem;
-    transition: 0.3s;
-    line-height: 1;
-}
-
-.back-arrow:hover {
-    color: #FFFFFF; /* Devient blanche au survol */
-    transform: translateX(-5px); /* Petit mouvement vers la gauche */
-}
+        .back-arrow { color: #9BA0AB; text-decoration: none; font-size: 1.5rem; transition: 0.3s; line-height: 1; }
+        .back-arrow:hover { color: #FFFFFF; transform: translateX(-5px); }
     </style>
 </head>
 <body>
 
     <nav>
-    <div style="display: flex; align-items: center; gap: 20px;">
-        <!-- La flèche de retour -->
-        <a href="index.html" class="back-arrow" title="Retour à l'accueil">❮</a>
-        
-        <a href="index.html" class="brand-name">REID</a>
-    </div>
-    
-    <div class="nav-links">
-        <div class="dropdown"><a href="femme.html" class="dropbtn" style="color:white">Femme</a></div>
-        <div class="dropdown"><a href="#" class="dropbtn">Homme</a></div>
-        <div class="dropdown"><a href="#" class="dropbtn">À venir</a></div>
-    </div>
-</nav>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <a href="index.html" class="back-arrow">❮</a>
+            <a href="index.html" class="brand-name">REID</a>
+        </div>
+        <div class="nav-links">
+            <div class="dropdown"><a href="femme.html" class="dropbtn" style="color:white">Femme</a></div>
+            <div class="dropdown"><a href="homme.html" class="dropbtn">Homme</a></div>
+            <div class="dropdown"><a href="#" class="dropbtn">À venir</a></div>
+        </div>
+    </nav>
 
-    <!-- SIDEBAR COULISSANTE -->
     <aside class="sidebar" id="sidebar">
         <div class="toggle-sidebar" onclick="toggleSidebar()">❯</div>
         <h3>CATEGORIES</h3>
         <ul class="filter-group">
-            <!-- IMPORTANT : filterCategory('NOM') doit correspondre au data-category des cartes -->
-            <li onclick="filterCategory('all', this)">Tout voir</li>
+            <li onclick="filterCategory('all', this)" class="active-filter">Tout voir</li>
             <li onclick="filterCategory('vestes', this)">Vestes</li>
             <li onclick="filterCategory('hauts', this)">Hauts</li>
             <li onclick="filterCategory('bas', this)">Bas</li>
@@ -166,61 +98,80 @@
             <li onclick="filterCategory('accessoires', this)">Accessoires</li>
             <li onclick="filterCategory('bijoux', this)">Bijoux</li>
         </ul>
-        
-        <h3>COLORIS PRINCIPAL</h3>
-        <div class="colors">
-            <div class="color-circle" style="background: #000;"></div>
-            <div class="color-circle" style="background: #FFF;"></div>
-            <div class="color-circle" style="background: #390007;"></div>
-        </div>
     </aside>
 
-    <div class="shop-container" id="main-content">
-        <main class="product-grid" id="product-grid">
-            
-            <!-- EXEMPLE PRODUIT (VESTE) -->
-            <!-- IMPORTANT : J'ai ajouté data-category="vestes" ici -->
-            <div class="product-card" data-category="vestes">
-                <div class="product-image">
-                    <img src="images/femme/vestes/veste-noire.gif" class="main-img" alt="Produit">
-                </div>
-                <div class="product-info">
-                    <div>
-                        <h4>VESTE REID V1</h4>
-                        <div class="price">45.00 €</div>
-                        <div class="colors">
-                            <div class="color-circle active" style="background: #000;" onclick="changeImage(this, 'images/femme/vestes/veste-noire.gif')"></div>
-                            <div class="color-circle" style="background: #390007;" onclick="changeImage(this, 'images/femme/vestes/veste-rouge.gif')"></div>
-                        </div>
-                    </div>
-                    <p class="description">Une coupe cintrée avec des détails néons.</p>
-                </div>
-            </div>
-
-            <!-- EXEMPLE PRODUIT (BIJOUX) -->
-            <div class="product-card" data-category="bijoux">
-                <div class="product-image">
-                    <img src="images/femme/bijoux/collier-reid.gif" class="main-img" alt="Produit">
-                </div>
-                <div class="product-info">
-                    <div>
-                        <h4>COLLIER ÉBÈNE</h4>
-                        <div class="price">15.00 €</div>
-                        <div class="colors">
-                            <div class="color-circle active" style="background: #000;" onclick="changeImage(this, 'images/femme/bijoux/collier-reid.gif')"></div>
-                        </div>
-                    </div>
-                    <p class="description">Un bijou fin pour sublimer vos tenues de soirée.</p>
-                </div>
-            </div>
-
-        </main>
+    <div class="shop-container">
+        <!-- LA GRILLE EST VIDE ICI, LE SCRIPT VA LA REMPLIR -->
+        <main class="product-grid" id="product-grid"></main>
     </div>
 
     <footer>&copy; 2024 REID STUDIO. TOUS DROITS RÉSERVÉS.</footer>
 
 <script>
-    // 1. Ouvrir/fermer la sidebar
+    // --- 1. TA LISTE DE VÊTEMENTS (C'est ici que tu ajoutes tout !) ---
+    const catalogueFemme = [
+const catalogueFemme = [
+    {
+        nom: "Veste REID Alpha",
+        categorie: "vestes",
+        prix: "45.00 €",
+        description: "Coupe ajustée, style néon.",
+        // On liste les images par couleur
+        couleurs: {
+            "noir": "vetements/femme/vestes/veste-noire.png",
+            "rouge": "vetements/femme/vestes/veste-rouge.png"
+        }
+    },
+    {
+        nom: "Sous top transparent",
+        categorie: "vestes",
+        prix: "100€",
+        description: "Top transparent à bande noire.",
+        couleurs: {
+            "noir": "vetements/femme/vestes/top_transpa-black.png"
+        }
+    }
+    // Tu ajouteras les autres ici...
+];
+        // Pour ajouter un vêtement, copie le bloc { ... } ci-dessus, mets une virgule et colle-le ici.
+    ];
+
+    // --- 2. FONCTION POUR GÉNÉRER LA BOUTIQUE AUTOMATIQUEMENT ---
+    function genererBoutique() {
+        const grille = document.getElementById('product-grid');
+        grille.innerHTML = ""; // On vide
+
+        catalogueFemme.forEach(item => {
+            // On prend la première couleur pour l'image de base
+            const codesCouleurs = Object.keys(item.couleurs);
+            const imageBase = item.couleurs[codesCouleurs[0]];
+
+            const htmlCarte = `
+                <div class="product-card" data-category="${item.categorie}">
+                    <div class="product-image">
+                        <img src="${imageBase}" class="main-img" alt="${item.nom}">
+                    </div>
+                    <div class="product-info">
+                        <div>
+                            <h4>${item.nom}</h4>
+                            <div class="price">${item.prix}</div>
+                            <div class="colors">
+                                ${codesCouleurs.map((code, index) => `
+                                    <div class="color-circle ${index === 0 ? 'active' : ''}" 
+                                         style="background: ${code};" 
+                                         onclick="changeImage(this, '${item.couleurs[code]}')"></div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <p class="description">${item.desc}</p>
+                    </div>
+                </div>
+            `;
+            grille.innerHTML += htmlCarte;
+        });
+    }
+
+    // --- 3. LES FONCTIONS DE NAVIGATION (Garde-les telles quelles) ---
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         const btn = document.querySelector('.toggle-sidebar');
@@ -228,7 +179,6 @@
         btn.innerHTML = sidebar.classList.contains('active') ? "❮" : "❯";
     }
 
-    // 2. Changer l'image au clic couleur
     function changeImage(element, newSrc) {
         const card = element.closest('.product-card');
         card.querySelector('.main-img').src = newSrc;
@@ -237,19 +187,12 @@
         element.classList.add('active');
     }
 
-    // 3. FONCTION DE FILTRAGE (CORRIGÉE)
     function filterCategory(category, clickedElement) {
         const cards = document.querySelectorAll('.product-card');
         const filters = document.querySelectorAll('.filter-group li');
-
-        // Gérer l'apparence des boutons de la sidebar
         filters.forEach(f => f.classList.remove('active-filter'));
         
-        // Si on a cliqué sur un bouton (manuel)
-        if (clickedElement) {
-            clickedElement.classList.add('active-filter');
-        } 
-        // Si ça vient de l'URL (automatique)
+        if (clickedElement) { clickedElement.classList.add('active-filter'); }
         else {
             filters.forEach(f => {
                 if(f.getAttribute('onclick') && f.getAttribute('onclick').includes("'" + category + "'")) {
@@ -258,24 +201,20 @@
             });
         }
 
-        // LE FILTRAGE REEL
         cards.forEach(card => {
             const cardCat = card.getAttribute('data-category');
-            if (category === 'all' || cardCat === category) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
+            card.style.display = (category === 'all' || cardCat === category) ? 'flex' : 'none';
         });
     }
 
-    // 4. CHARGEMENT AUTOMATIQUE DEPUIS L'URL
+    // --- 4. CHARGEMENT AU DÉMARRAGE ---
     window.addEventListener('load', function() {
+        genererBoutique(); // On crée d'abord les 535 vêtements
+        
         const urlParams = new URLSearchParams(window.location.search);
         const categoryFromUrl = urlParams.get('cat');
-
         if (categoryFromUrl) {
-            filterCategory(categoryFromUrl);
+            filterCategory(categoryFromUrl); // Puis on filtre si besoin
         }
     });
 </script>
