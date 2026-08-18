@@ -111,28 +111,38 @@
     // --- 1. TA LISTE DE VÊTEMENTS (C'est ici que tu ajoutes tout !) ---
     const catalogueFemme = [
 const catalogueFemme = [
-    {
-        nom: "Veste REID Alpha",
-        categorie: "vestes",
-        prix: "45.00 €",
-        description: "Coupe ajustée, style néon.",
-        // On liste les images par couleur
-        couleurs: {
-            "noir": "vetements/femme/vestes/veste-noire.png",
-            "rouge": "vetements/femme/vestes/veste-rouge.png"
-        }
-    },
-    {
-        nom: "Sous top transparent",
-        categorie: "vestes",
-        prix: "100€",
-        description: "Top transparent à bande noire.",
-        couleurs: {
-            "noir": "vetements/femme/vestes/top_transpa-black.png"
-        }
+        {
+            nom: "Veste en cuir",
+            categorie: "vestes",
+            prix: "300€",
+            desc:"",
+            // Liste tes couleurs ici : "CodeCouleur": "LienImage"
+            couleurs: {
+                "#000000": "vetements/femme/vestes/vestcuir_black.png",
+                "#520000": "vetements/femme/vestes/vestcuir_red.png"
+            }
+        },
+        {
+            nom: "COLLIER ÉBÈNE",
+            categorie: "bijoux",
+            prix: "15.00 €",
+            desc: "",
+            couleurs: {
+                "#000000": "vetements/femme/bijoux/collier-reid.png"
+            }
+        },
+
+        {
+    nom: "NOM DU VETEMENT",
+    categorie: "hauts", // mets bien le nom de la catégorie en minuscule
+    prix: "20.00 €",
+    desc: "Ta description ici.",
+    couleurs: {
+        "#HEXA1": "lien-image-1.png",
+        "#HEXA2": "lien-image-2.png"
     }
-    // Tu ajouteras les autres ici...
-];
+},
+ 
         // Pour ajouter un vêtement, copie le bloc { ... } ci-dessus, mets une virgule et colle-le ici.
     ];
 
