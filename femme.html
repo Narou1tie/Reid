@@ -261,6 +261,29 @@
                 }
             });
         }
+        // Ce code s'exécute automatiquement au chargement de la page
+window.onload = function() {
+    // 1. On regarde s'il y a un paramètre "cat" dans l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFromUrl = urlParams.get('cat');
+
+    // 2. Si on trouve une catégorie (ex: vestes)
+    if (categoryFromUrl) {
+        // On active le filtre
+        filterCategory(categoryFromUrl);
+        
+        // Optionnel : on met à jour le style dans la sidebar pour montrer quel filtre est actif
+        const filters = document.querySelectorAll('.filter-group li');
+        filters.forEach(f => {
+            f.classList.remove('active-filter');
+            // Si le texte du bouton contient la catégorie, on l'allume
+            if(f.getAttribute('onclick').includes(categoryFromUrl)) {
+                f.classList.add('active-filter');
+            }
+        });
+    }
+};
+        
     </script>
 
 </body>
